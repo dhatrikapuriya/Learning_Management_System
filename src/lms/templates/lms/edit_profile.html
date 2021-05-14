@@ -1,0 +1,121 @@
+
+{% extends "lms/base.html" %} {% load static %} {% block content %}
+<link rel="stylesheet" type="text/css" href={% static 'css/fac_style.css' %}>
+<link rel="stylesheet" type="text/css" href={% static 'css/edit_profile.css' %}>
+
+<div class="main__container scroll">
+    <!-- MAIN TITLE STARTS HERE -->
+
+    <div class="main__title">
+        <img src={% static 'css/course.svg' %} alt=""/>
+        <div class="main__greeting">
+            <h1>Profile</h1>
+            {# <p>Credits</p>#}
+        </div>
+    </div>
+
+    <div class="container cont1">
+        <div class="container1">
+            <h2> </h2>
+
+
+            <div class="course">
+                <div class="preview">
+                    {# <h6>Assignment name</h6>#}
+
+                    <img width="70" src={% static 'css/avatar.svg' %}/>
+                    {# <a href="#">View all chapters</a>#}
+
+                </div>
+
+                <div class="info">
+
+                    <div class="right" style="float:left;">
+
+                        <h6>
+                            Name
+                        </h6>
+                        <h2> {{f_name}} {{ l_name }}</h2>
+
+                    </div>
+
+                    <div class="left" style="float: right">
+                        <h6>
+                            Enrollment Number
+                        </h6>
+                        <h2>{{ id }}</h2>
+                    </div>
+                    <br/>
+
+                    <form enctype="multipart/form-data" action="" method="POST" onsubmit="return validateForm()"
+                          name="myForm">
+                        <div class="form-edit">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                            <div class="label-tag">{{ field.label_tag }}</div>
+                            <div class="input-data1">{{ field }}</div>
+                            <div class="help-text">
+                                {% if field.help_text %}
+                                {{ field.help_text|safe }}
+                                <br/>
+                                {% endif %}
+                            </div>
+                            <br/>
+                            {% endfor %}
+                            <div class="error-message">
+                                {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                {{ error }}
+                                {% endfor %}
+                                {% endfor %}
+                            </div>
+                            <br/>
+                            <div class="form-row submit-btn">
+                                <input required type="submit" class="btn2" value="POST" value="Change Password"/>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<script>
+    document.getElementById("uploadBtn").onchange = function () {
+        document.getElementById("uploadFile").value = this.value;
+        console.log(this.value)
+    };
+
+
+</script>
+<script>
+    function deadline_func() {
+        var temp2 = "Test";
+        console.log(temp2);
+    };
+
+    // function validateForm() {
+    //     var x = document.forms["myForm"]["prev_password"].value;
+    //     var y = document.forms["myForm"]["password1"].value;
+    //     var z = document.forms["myForm"]["password2"].value;
+    //     if (x != {{ prev_password }}) {
+    //         alert("Your original password dosent match!");
+    //         return false;
+    //     }
+    //     if (y != z) {
+    //         alert("Reenter your new password again!");
+    //         return false;
+    //     }
+    // }
+
+</script>
+
+{% endblock %}
+

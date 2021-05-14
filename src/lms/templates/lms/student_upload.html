@@ -1,0 +1,79 @@
+{#Faculty upload#}
+{% extends "lms/base.html" %} {% load static %} {% block content %}
+    <link rel="stylesheet" type="text/css" href={% static 'css/fac_style.css' %}>
+    <link rel="stylesheet" type="text/css" href={% static 'css/temp.css' %}>
+
+    <div class="main__container scroll">
+        <!-- MAIN TITLE STARTS HERE -->
+
+        <div class="main__title">
+            <img src={% static 'css/course.svg' %} alt=""/>
+            <div class="main__greeting">
+                <h1>{{ course_name }}</h1>
+{#                <p>Credits</p>#}
+            </div>
+        </div>
+
+        <div class="container">
+            <nav><h1>Upload Assignment of {{ assign_id }}</h1><br/></nav>
+
+
+                <table>
+                    <tr>
+                        <th>Assignment</th>
+                        <td><a href="/{{ PDF }}" target="_blank" style="color: #1a1a93">
+                            Click here to view Assignment
+                        </a></td>
+                    </tr>
+                    <tr>
+                        <th>Weightage</th>
+                        <td>{{ weightage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Deadline</th>
+                        <td>{{ deadline }}</td>
+                    </tr>
+                    <tr>
+                        <th>Submission status</th>
+                        <td>{{ status }}</td>
+                    </tr>
+                </table>
+                <form
+                        enctype="multipart/form-data"
+                        action=""
+                        method="POST"
+                        name="myForm">
+
+                    {% csrf_token %}
+                    <div class="blk">
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">Choose Assignment</button>
+                            <input id="uploadBtn" type="file" name="PDF" required/>
+                        </div>
+                        <div>
+                            <input id="uploadFile" disabled/>
+                        </div>
+                        <div class="form-row1 submit-btn">
+                            <input type="submit" class="btn1" value="SUBMIT">
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+        </div>
+    </div>
+    <script>
+        document.getElementById("uploadBtn").onchange = function () {
+            document.getElementById("uploadFile").value = this.value;
+            console.log(this.value);
+        };
+
+    </script>
+    <script>
+        
+       
+    </script>
+
+{% endblock %}
